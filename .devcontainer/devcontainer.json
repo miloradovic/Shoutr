@@ -1,0 +1,11 @@
+{
+	"name": "Shoutr",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "web",
+	"workspaceFolder": "/myapp",
+	"shutdownAction": "stopCompose",
+	"extensions": [
+		"rebornix.Ruby",
+		"castwide.solargraph"
+	]
+}
