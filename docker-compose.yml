@@ -6,6 +6,18 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
+  solr:
+    image: solr
+    ports:
+      - "8983:8983"
+    volumes:
+      - solr_data:/opt/solr/server/solr/mycores
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - development
+    depends_on:
+      - db
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -15,3 +27,7 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - solr
+volumes:
+  postgres:
+  solr_data:
